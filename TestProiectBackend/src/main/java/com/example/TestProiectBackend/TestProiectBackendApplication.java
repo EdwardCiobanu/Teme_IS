@@ -14,7 +14,6 @@ public class TestProiectBackendApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TestProiectBackendApplication.class, args);
 
-		Employee employee = new Employee(1, "Mihai", 2);
 	}
 
 }

@@ -10,4 +10,8 @@ import java.util.List;
 public interface EmployeeRepository extends CrudRepository<Employee, Integer> {
     Employee findFirstById(Integer id);
     List<Employee> findAllByNume(String nume);
+    List<Employee> findAllByIdAfter(Integer id);
+
+    // in repouri pun doar cele care nu sunt default
+    // save, update(aceeasi chestie cu update), delete, find all sunt default
 }

@@ -14,4 +14,5 @@ public interface ProductService {
     public List<Product> getAllProducts();
     public void DeleteById(Integer id);
     public void Delete(Product product);
+    public void DeleteByNume(String nume);
 }

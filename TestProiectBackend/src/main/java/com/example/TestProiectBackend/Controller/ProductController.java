@@ -33,10 +33,22 @@ public class ProductController {
         System.out.println(product);
     }
 
+    @PostMapping("/DeleteById")
+    public void deleteById(@RequestBody Integer id){
+        productServiceImplementation.DeleteById(id);
+        System.out.println(id);
+    }
+
     @PostMapping("/GetById")
     public ResponseEntity ReadByID(@RequestBody Integer id){
         Product product = productServiceImplementation.ReadById(id);
         return ResponseEntity.status(HttpStatus.OK).body(product);
+    }
+
+    @PostMapping("/DeleteByNume")
+    public void deleteByNume(@RequestBody String nume){
+        productServiceImplementation.DeleteByNume(nume);
+        System.out.println(nume);
     }
 
 }

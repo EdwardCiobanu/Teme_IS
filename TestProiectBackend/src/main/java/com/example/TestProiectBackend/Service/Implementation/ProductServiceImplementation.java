@@ -49,5 +49,13 @@ public class ProductServiceImplementation implements ProductService {
         productRepository.delete(product);
     }
 
+    @Override
+    public void DeleteByNume(String nume){
+        List<Product> produse = productRepository.findAllByNume(nume);
+        for (Product produs:produse) {
+            productRepository.delete(produs);
+        }
+    }
+
 
 }

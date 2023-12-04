@@ -47,6 +47,7 @@ public class ProductController {
 
     @PostMapping("/DeleteByNume")
     public void deleteByNume(@RequestBody String nume){
+        nume = nume.substring(1, nume.length() - 1);
         productServiceImplementation.DeleteByNume(nume);
         System.out.println(nume);
     }

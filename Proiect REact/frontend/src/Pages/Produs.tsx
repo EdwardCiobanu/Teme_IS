@@ -68,6 +68,7 @@ export default function Produs() {
 
     const onDeleteNume= (event: any): void => {
         console.log(nume)
+        // if(nume.length != 0)
         axios.post("http://localhost:8080/Product/DeleteByNume", nume, {headers: {"content-type": "application/json"
             }}).then((response: any) : void =>{
             console.log(response)

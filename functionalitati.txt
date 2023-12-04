@@ -1,0 +1,8 @@
+Funcționalități:
+	- Adăugare / ștergere de produse
+	- Login
+	- Sing Up
+	- Vizualizare produse
+	- Adăugare de produse pentru o masa
+	- Total de plata pentru masa selectata
+	- Total de plata pentru client în parte

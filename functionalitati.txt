@@ -1,8 +1,15 @@
+Tabele:
+	- Employee: Va stoca informații despre un angajat, are nume, rol(între 1 și 3) 1 = admin, 2 = non-admin, 3 = mă mai gândesc, email și parola (pentru logare). Va avea o relație one to one cu masa. Un angajat se poate ocupa de o singura masa.
+	- Masa: Va stoca numărul de locuri disponibile la acea masa și id-ul mesei, prin care poate fi recunoscuta.
+	- Person: Va fi clientul, acesta se va identifica printr-un id, un nume și varsta. El poate sa stea la mai multe mese(trebuie regândit cred), de asta are o relație one to many cu masa. De asemenea are o relație many to many cu produsul deoarece mai multi clienți pot comanda mai multe produse.
+	-Product: Va stoca informații despre un produs, se va putea identifica printr-un id unic, printr-un nume și un preț.
+
 Funcționalități:
 	- Adăugare / ștergere de produse
 	- Login
-	- Sing Up
-	- Vizualizare produse
+	- Sign Up
+	- Vizualizare produse (pentru ca un client sa poată face comanda)
 	- Adăugare de produse pentru o masa
-	- Total de plata pentru masa selectata
-	- Total de plata pentru client în parte
+	- Adăugare de produse pentru un client
+	- Total de plata pentru masa selectata (Bon pentru toată masa)
+	- Total de plata pentru client în parte (Bon pentru client individual) - Voi cauta toate produsele de la masa care sunt atribuite unui client și le voi face un total.

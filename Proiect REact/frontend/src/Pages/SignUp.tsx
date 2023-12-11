@@ -16,12 +16,13 @@ import background from "./lacat.jpg";
 import {useNavigate} from "react-router-dom";
 import { Link } from 'react-router-dom';
 import {InputAdornment} from "@mui/material";
+import axios from "axios";
 
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-export default function SignInSide() {
+export default function SignUpSide() {
 
     const [nume, setNume] = React.useState<string>("");
     const [rol, setRol] = React.useState<number>(0);
@@ -42,6 +43,28 @@ export default function SignInSide() {
     const onChangePassword = (event: any): void => {
         setPassword(event.target.value)
     }
+    const onSave = (event: any): void => {
+        console.log(nume)
+        console.log(rol)
+        console.log(email)
+        console.log(password)
+        const employee = {
+            nume: nume,
+            rol: rol,
+            email: email,
+            password: password,
+        }
+        axios.post("http://localhost:8080/Employee/Insert", employee, {headers: {"Content-Type": "application/json"
+            }}).then((response: any) : void =>{
+            console.log(response)
+            alert(`Login succesfully`);
+        }).catch((error) => {
+            console.error(error.response.data)
+            alert(`Error: ${error.response.data}`);
+        })
+
+    }
+
 
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -140,6 +163,7 @@ export default function SignInSide() {
                                 fullWidth
                                 variant="contained"
                                 sx={{ mt: 3, mb: 2 }}
+                                onClick = {onSave}
                             >
                                 Sign Up
                             </Button>

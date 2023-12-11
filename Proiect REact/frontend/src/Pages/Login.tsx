@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import background from "./bar.jpg";
 import {useNavigate} from "react-router-dom";
 import { Link } from 'react-router-dom';
+import axios from "axios";
 
 
 // TODO remove, this demo shouldn't need to reset the theme.
@@ -32,6 +33,39 @@ export default function SignInSide() {
 
     const onChangePassword = (event: any): void => {
         setPassword(event.target.value)
+    }
+
+    const onLogin = (event: any): void => {
+        console.log(email)
+        console.log(password)
+        const employee = {
+            email: email,
+            password: password,
+        }
+        // axios.post("http://localhost:8080/Employee/Login", employee, {headers: {"content-type": "application/json"
+        //     }}).then((response: any): void => {
+        //     console.log(response);
+        //
+        //     // Assuming your response includes a success flag
+        //     const loginSuccessful = true;
+        //
+        //     if (loginSuccessful) {
+        //         navigate("/Home");
+        //     }
+        // }).catch((error: any): void => {
+        //     console.error("Error during login:", error);
+        // });
+        axios.post("http://localhost:8080/Employee/Login", employee, {headers: {"Content-Type": "application/json"
+            }}).then((response: any) : void =>{
+            console.log(response)
+            navigate("/HomePage", { state:{key:response.data.rol}})
+            alert(`Login succesfully`);
+        }).catch((error) => {
+            console.error(error.response.data)
+            alert(`Error: ${error.response.data}`);
+        })
+
+
     }
 
 
@@ -106,6 +140,7 @@ export default function SignInSide() {
                                 fullWidth
                                 variant="contained"
                                 sx={{ mt: 3, mb: 2 }}
+                                onClick = {onLogin}
                             >
                                 Sign In
                             </Button>

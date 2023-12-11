@@ -13,4 +13,5 @@ public interface EmployeeService {
     public List<Employee> getAllEmployees();
     public void DeleteById(Integer id);
     public void Delete(Employee employee);
+    public Employee findByEmail(String email);
 }

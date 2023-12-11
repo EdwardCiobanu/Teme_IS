@@ -29,14 +29,24 @@ public class ProductController {
     }
     @PostMapping("/Insert")
     public void insert(@RequestBody Product product){
-        productServiceImplementation.Insert(product);
-        System.out.println(product);
+        if(product.getId() == null || product.getNume().isEmpty() || product.getPrice() == null){
+            System.out.println("Date insuficiente");
+        }
+        else {
+            productServiceImplementation.Insert(product);
+            System.out.println(product);
+        }
     }
 
     @PostMapping("/DeleteById")
     public void deleteById(@RequestBody Integer id){
-        productServiceImplementation.DeleteById(id);
-        System.out.println(id);
+        if(id != null) {
+            productServiceImplementation.DeleteById(id);
+            System.out.println(id);
+        }
+        else{
+            System.out.println("Date insuficiente");
+        }
     }
 
     @PostMapping("/GetById")
@@ -47,9 +57,14 @@ public class ProductController {
 
     @PostMapping("/DeleteByNume")
     public void deleteByNume(@RequestBody String nume){
-        nume = nume.substring(1, nume.length() - 1);
-        productServiceImplementation.DeleteByNume(nume);
-        System.out.println(nume);
+        if(nume.isEmpty()){
+            System.out.println("Date insuficiente");
+        }
+        else {
+            nume = nume.substring(1, nume.length() - 1);
+            productServiceImplementation.DeleteByNume(nume);
+            System.out.println(nume);
+        }
     }
 
 }

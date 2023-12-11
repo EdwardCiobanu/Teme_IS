@@ -48,4 +48,5 @@ public class EmployeeServiceImplementation implements EmployeeService {
     }
 
 
+    public Employee findByEmail(String email) { return employeeRepository.findByEmail(email); }
 }

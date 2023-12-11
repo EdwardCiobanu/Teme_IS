@@ -11,6 +11,7 @@ import java.util.List;
 @Data
 public class Employee {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String nume;
     private Integer rol;
@@ -19,8 +20,7 @@ public class Employee {
     @OneToOne
     private Masa masa;
 
-    public Employee(Integer id, String nume, Integer rol, String email, String password) {
-        this.id = id;
+    public Employee(String nume, Integer rol, String email, String password) {
         this.nume = nume;
         this.rol = rol;
         this.email = email;

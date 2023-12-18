@@ -28,24 +28,24 @@ public class ProductController {
         System.out.println(data);
     }
     @PostMapping("/Insert")
-    public void insert(@RequestBody Product product){
-        if(product.getId() == null || product.getNume().isEmpty() || product.getPrice() == null){
-            System.out.println("Date insuficiente");
+    public ResponseEntity<Object> insert(@RequestBody Product product){
+        String string = productServiceImplementation.Insert(product);
+        if(string.equals("Product added succesfully")){
+            return ResponseEntity.ok(string);
         }
         else {
-            productServiceImplementation.Insert(product);
-            System.out.println(product);
+            return ResponseEntity.badRequest().body(string);
         }
     }
 
     @PostMapping("/DeleteById")
-    public void deleteById(@RequestBody Integer id){
-        if(id != null) {
-            productServiceImplementation.DeleteById(id);
-            System.out.println(id);
+    public ResponseEntity<Object> deleteById(@RequestBody Product product){
+        String string = productServiceImplementation.DeleteById(product.getId());
+        if(string.equals("Product deleted succesfully")) {
+            return ResponseEntity.ok(string);
         }
         else{
-            System.out.println("Date insuficiente");
+            return ResponseEntity.badRequest().body(string);
         }
     }
 
@@ -56,14 +56,15 @@ public class ProductController {
     }
 
     @PostMapping("/DeleteByNume")
-    public void deleteByNume(@RequestBody String nume){
-        if(nume.isEmpty()){
-            System.out.println("Date insuficiente");
+    public ResponseEntity<Object> deleteByNume(@RequestBody String nume){
+        nume = nume.substring(1, nume.length() - 1);
+        productServiceImplementation.DeleteByNume(nume);
+        String string = productServiceImplementation.DeleteByNume(nume);
+        if(string.equals("Product deleted succesfully")){
+            return ResponseEntity.ok(string);
         }
         else {
-            nume = nume.substring(1, nume.length() - 1);
-            productServiceImplementation.DeleteByNume(nume);
-            System.out.println(nume);
+            return ResponseEntity.badRequest().body(string);
         }
     }
 

@@ -9,10 +9,10 @@ import java.util.List;
 @Component
 public interface ProductService {
     Product findFirstById(Integer id);
-    public void Insert(Product product);
+    public String Insert(Product product);
     public Product ReadById(Integer id);
     public List<Product> getAllProducts();
-    public void DeleteById(Integer id);
+    public String DeleteById(Integer id);
     public void Delete(Product product);
-    public void DeleteByNume(String nume);
+    public String DeleteByNume(String nume);
 }

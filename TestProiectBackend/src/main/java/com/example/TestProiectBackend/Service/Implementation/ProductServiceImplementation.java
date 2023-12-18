@@ -24,8 +24,16 @@ public class ProductServiceImplementation implements ProductService {
     }
 
     @Override
-    public void Insert(Product product) {
-        productRepository.save(product);
+    public String Insert(Product product) {
+        if(product.getId() == null || product.getNume().isEmpty() || product.getPrice() == null){
+            return ("All fields are required");
+        }
+        else {
+            productRepository.save(product);
+            System.out.println(product);
+            return ("Product added succesfully");
+        }
+
     }
 
     @Override
@@ -40,8 +48,17 @@ public class ProductServiceImplementation implements ProductService {
     }
 
     @Override
-    public void DeleteById(Integer id){
-        productRepository.deleteById(id);
+    public String DeleteById(Integer id){
+        if(id == null) {
+            return ("Product id needed to be deleted");
+
+        }
+        else{
+            productRepository.deleteById(id);
+//            System.out.println(id);
+            return ("Product deleted succesfully");
+        }
+
     }
 
     @Override
@@ -50,10 +67,16 @@ public class ProductServiceImplementation implements ProductService {
     }
 
     @Override
-    public void DeleteByNume(String nume){
-        List<Product> produse = productRepository.findAllByNume(nume);
-        for (Product produs:produse) {
-            productRepository.delete(produs);
+    public String DeleteByNume(String nume){
+        if(nume.isEmpty()){
+            return ("Product name needed to be deleted");
+        }
+        else {
+            List<Product> produse = productRepository.findAllByNume(nume);
+            for (Product produs:produse) {
+                productRepository.delete(produs);
+            }
+            return ("Product deleted succesfully");
         }
     }
 

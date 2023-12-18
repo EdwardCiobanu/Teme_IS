@@ -51,18 +51,30 @@ export default function Produs() {
             nume: nume,
             price: price,
         }
+
         axios.post("http://localhost:8080/Product/Insert", product, {headers: {"content-type": "application/json"
             }}).then((response: any) : void =>{
             console.log(response)
+            alert(response.data);
+        }).catch((error) => {
+            console.error(error.response.data)
+            alert(`Error: ${error.response.data}`);
         })
 
     }
 
     const onDeleteId = (event: any): void => {
         console.log(id)
-        axios.post("http://localhost:8080/Product/DeleteById", id, {headers: {"content-type": "application/json"
+        const product = {
+            id: id
+        }
+        axios.post("http://localhost:8080/Product/DeleteById", product, {headers: {"content-type": "application/json"
             }}).then((response: any) : void =>{
             console.log(response)
+            alert(response.data);
+        }).catch((error) => {
+            console.error(error.response.data)
+            alert(`Error: ${error.response.data}`);
         })
     }
 
@@ -72,6 +84,10 @@ export default function Produs() {
         axios.post("http://localhost:8080/Product/DeleteByNume", nume, {headers: {"content-type": "application/json"
             }}).then((response: any) : void =>{
             console.log(response)
+            alert(response.data);
+        }).catch((error) => {
+            console.error(error.response.data)
+            alert(`Error: ${error.response.data}`);
         })
     }
 
@@ -154,7 +170,7 @@ export default function Produs() {
                             </Grid>
                         </Grid>
                         <Button
-                            type="submit"
+                            type="button"
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
@@ -163,7 +179,7 @@ export default function Produs() {
                             Adaugare Produs
                         </Button>
                         <Button
-                            type="submit"
+                            type="button"
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}

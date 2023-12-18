@@ -24,19 +24,7 @@ public class EmployeeController {
     private final EmployeeServiceImplementation employeeServiceImplementation;
     private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 
-    private boolean isValidEmail(String email) {
-        // Define a basic pattern for email validation
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
 
-        // Create a Pattern object
-        Pattern pattern = Pattern.compile(emailRegex);
-
-        // Create matcher object
-        Matcher matcher = pattern.matcher(email);
-
-        // Return whether the email matches the pattern
-        return matcher.matches();
-    }
 
     @GetMapping("/GetData")
     public String getMessage(){
@@ -49,38 +37,27 @@ public class EmployeeController {
     }
     @PostMapping("/Insert")
     public ResponseEntity<String> insert(@RequestBody Employee employee){
-        if(employee.getNume().isEmpty() || employee.getRol() == null || employee.getEmail().isEmpty() || employee.getPassword().isEmpty()){
-            //System.out.println("Date insuficiente");
-            return ResponseEntity.badRequest().body("All fields are required");
+        String string = employeeServiceImplementation.Insert(employee);
+        if(string.equals("Account created succesfully"))
+        {
+            return ResponseEntity.ok(string);
         }
-        else if (!isValidEmail(employee.getEmail())) {
-            //System.out.println("Adresa de email incorecta");
-            return ResponseEntity.badRequest().body("Invalid email address");
-        }
-        else{
-            employeeServiceImplementation.Insert(employee);
-            return ResponseEntity.ok("Account created succesfully");
-            //System.out.println(employee);
+        else
+        {
+            return ResponseEntity.badRequest().body(string);
         }
     }
     @PostMapping("/Login")
     public ResponseEntity<Object> login(@RequestBody EmployeeHelp employee) {
-        String email = employee.getEmail();
-        String password = employee.getPassword();
+        Employee utilizator = employeeServiceImplementation.login(employee);
 
-        if (email.isEmpty() || password.isEmpty()) {
-            logger.error("Email or password is empty");
-            return ResponseEntity.badRequest().body("Email or password is empty");
+        if(utilizator == null){
+            logger.error("Invalid credentials");
+            return ResponseEntity.badRequest().body("Invalid credentials");
         }
-
-        Employee employee1 = employeeServiceImplementation.findByEmail(email);
-
-        if (employee1 != null && employee1.getPassword().equals(password)) {
-            logger.info("Login successful for user with email: {}", email);
-            return ResponseEntity.ok(employee1);
-        } else {
-            logger.warn("Invalid email or password for user with email: {}", email);
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
+        else{
+            logger.info("Login successful for user with email: {}", utilizator.getEmail());
+            return ResponseEntity.ok(utilizator);
         }
     }
 

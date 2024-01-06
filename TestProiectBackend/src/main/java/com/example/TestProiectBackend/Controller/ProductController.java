@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/Product")
@@ -61,6 +63,41 @@ public class ProductController {
         productServiceImplementation.DeleteByNume(nume);
         String string = productServiceImplementation.DeleteByNume(nume);
         if(string.equals("Product deleted succesfully")){
+            return ResponseEntity.ok(string);
+        }
+        else {
+            return ResponseEntity.badRequest().body(string);
+        }
+    }
+
+    @GetMapping("/FindAll")
+    public ResponseEntity<Object> findAll() {
+        List<Product> productList = productServiceImplementation.getAllProducts();
+
+        if (productList.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No products found");
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(productList);
+    }
+
+    @PostMapping("/Delete")
+    public ResponseEntity<Object> delete(@RequestBody Product product){
+        System.out.println(product);
+        String string = productServiceImplementation.Delete(product);
+        if(string.equals("Product deleted succesfully")){
+            return ResponseEntity.ok(string);
+        }
+        else {
+            return ResponseEntity.badRequest().body(string);
+        }
+    }
+
+    @PostMapping("/Update")
+    public ResponseEntity<Object> save(@RequestBody Product product){
+        System.out.println(product);
+        String string = productServiceImplementation.Save(product);
+        if(string.equals("Infos updated succesfully")){
             return ResponseEntity.ok(string);
         }
         else {

@@ -2,6 +2,7 @@ package com.example.TestProiectBackend.Service.Implementation;
 
 import com.example.TestProiectBackend.Model.Employee;
 import com.example.TestProiectBackend.Model.EmployeeHelp;
+import com.example.TestProiectBackend.Model.Product;
 import com.example.TestProiectBackend.Repository.EmployeeRepository;
 import com.example.TestProiectBackend.Service.EmployeeService;
 import lombok.RequiredArgsConstructor;
@@ -76,8 +77,14 @@ public class EmployeeServiceImplementation implements EmployeeService {
     }
 
     @Override
-    public void Delete(Employee employee){
-        employeeRepository.delete(employee);
+    public String Delete(Employee employee){
+        if(employee.getNume().isEmpty()) {
+            return ("Employee needed to be deleted");
+        }
+        else{
+            employeeRepository.delete(employee);
+            return ("Employee deleted succesfully");
+        }
     }
 
 
@@ -96,6 +103,22 @@ public class EmployeeServiceImplementation implements EmployeeService {
             return employee1;
         } else {
             return null;
+        }
+    }
+
+    public String Save(Employee employee) {
+        if(employee.getId() == null || employee.getNume().isEmpty() || employee.getRol() == null || employee.getEmail().isEmpty() || employee.getPassword().isEmpty()){
+            //System.out.println("Date insuficiente");
+            return ("All fields are required / Select an employee");
+        }
+        else if (!isValidEmail(employee.getEmail())) {
+            //System.out.println("Adresa de email incorecta");
+            return ("Invalid email address");
+        }
+        else{
+            employeeRepository.save(employee);
+            return ("Infos updated succesfully");
+            //System.out.println(employee);
         }
     }
 }

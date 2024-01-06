@@ -2,6 +2,7 @@ package com.example.TestProiectBackend.Service.Implementation;
 
 import com.example.TestProiectBackend.Model.Employee;
 import com.example.TestProiectBackend.Model.Masa;
+import com.example.TestProiectBackend.Model.Product;
 import com.example.TestProiectBackend.Repository.EmployeeRepository;
 import com.example.TestProiectBackend.Repository.MasaRepository;
 import com.example.TestProiectBackend.Service.MasaService;
@@ -23,8 +24,16 @@ public class MasaServiceImplementation implements MasaService {
     }
 
     @Override
-    public void Insert(Masa masa) {
-        masaRepository.save(masa);
+    public String Insert(Masa masa) {
+        if(masa.getId() == null || masa.getNrLocuri() == null){
+            return ("All fields are required");
+        }
+        else {
+            masaRepository.save(masa);
+            System.out.println(masa);
+            return ("Table added succesfully");
+        }
+
     }
 
     @Override
@@ -44,9 +53,29 @@ public class MasaServiceImplementation implements MasaService {
     }
 
     @Override
-    public void Delete(Masa masa){
-        masaRepository.delete(masa);
+    public String Delete(Masa masa){
+        if(masa.getNrLocuri() == 0 && masa.getId() == 0) {
+            return ("Table needed to be deleted");
+        }
+        else{
+            masaRepository.delete(masa);
+            return ("Table deleted succesfully");
+        }
     }
 
+
+    public String Save(Masa masa) {
+        System.out.println(masa.getId());
+        System.out.println(masa.getNrLocuri());
+        if(masa.getNrLocuri() == 0 && masa.getId() == 0){
+            //System.out.println("Date insuficiente");
+            return ("Numar de Locuri field is required / Select a table");
+        }
+        else{
+            masaRepository.save(masa);
+            return ("Infos updated succesfully");
+            //System.out.println(employee);
+        }
+    }
 
 }

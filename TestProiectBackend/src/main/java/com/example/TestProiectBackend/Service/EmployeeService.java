@@ -13,7 +13,8 @@ public interface EmployeeService {
     public Employee ReadById(Integer id);
     public List<Employee> getAllEmployees();
     public void DeleteById(Integer id);
-    public void Delete(Employee employee);
+    public String Delete(Employee employee);
     public Employee findByEmail(String email);
     public Employee login(EmployeeHelp credentials);
+    public String Save(Employee employee);
 }

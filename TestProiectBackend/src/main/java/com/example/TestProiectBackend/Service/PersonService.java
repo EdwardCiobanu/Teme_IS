@@ -10,9 +10,11 @@ import java.util.List;
 public interface PersonService {
 
     Person findFirstById(Integer id);
-    public void Insert(Person person);
+    public String Insert(Person person);
     public Person ReadById(Integer id);
     public List<Person> getAllPersons();
     public void DeleteById(Integer id);
-    public void Delete(Person person);
+    public String Delete(Person person);
+    public String Save(Person person);
+    public Person findFirstByNume(String nume);
 }

@@ -9,9 +9,10 @@ import java.util.List;
 @Component
 public interface MasaService {
     Masa findFirstById(Integer id);
-    public void Insert(Masa masa);
+    public String Insert(Masa masa);
     public Masa ReadById(Integer id);
     public List<Masa> getAllMese();
     public void DeleteById(Integer id);
-    public void Delete(Masa masa);
+    public String Delete(Masa masa);
+    public String Save(Masa masa);
 }

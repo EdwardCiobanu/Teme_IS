@@ -58,7 +58,9 @@ export default function SignInSide() {
         axios.post("http://localhost:8080/Employee/Login", employee, {headers: {"Content-Type": "application/json"
             }}).then((response: any) : void =>{
             console.log(response)
-            navigate("/HomePage", { state:{key:response.data.rol}})
+            if(response.data.rol == 1) navigate("/Admin", { state:{key:response.data}})
+            else navigate("/Angajat", { state:{key:response.data}})
+            //navigate("/HomePage", { state:{key:response.data.rol}})
             alert(`Login succesfully`);
         }).catch((error) => {
             console.error(error.response.data)

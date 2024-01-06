@@ -22,6 +22,8 @@ public class Product {
     private Integer id;
     private String nume;
     private Integer price;
+//    @OneToMany
+//    private List<Person> persons;
     @OneToMany
-    private List<Person> persons;
+    private List<Cos> cosuri;
 }

@@ -11,19 +11,15 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Person {
+public class Cos {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-    private String nume;
-    private Integer age;
-    @OneToMany
-    private List<Masa> mese;
-    @OneToMany
-    private List<Cos> cosuri;
+    private Integer cosid;
+    private Integer personid;
+    private Integer productid;
 
-    public Person(String nume, Integer age) {
-        this.nume = nume;
-        this.age = age;
+    public Cos(Integer personid, Integer productid) {
+        this.personid = personid;
+        this.productid = productid;
     }
 }

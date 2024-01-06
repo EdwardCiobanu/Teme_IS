@@ -131,7 +131,7 @@ export default function SignUpSide() {
                                 name="rol"
                                 autoComplete="rol"
                                 InputProps={{
-                                    startAdornment: <InputAdornment position="start">numar(1-3)</InputAdornment>,
+                                    startAdornment: <InputAdornment position="start">numar(1-2)</InputAdornment>,
                                 }}
                                 autoFocus
                                 onChange = {onChangeRol}

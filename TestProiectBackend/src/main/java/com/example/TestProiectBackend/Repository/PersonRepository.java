@@ -11,4 +11,6 @@ import java.util.List;
 public interface PersonRepository extends CrudRepository<Person, Integer> {
     Person findFirstById(Integer id);
     List<Person> findAllByNume(String nume);
+    Person findFirstByNume(String nume);
+
 }

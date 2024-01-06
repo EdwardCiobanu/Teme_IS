@@ -13,6 +13,8 @@ public interface ProductService {
     public Product ReadById(Integer id);
     public List<Product> getAllProducts();
     public String DeleteById(Integer id);
-    public void Delete(Product product);
+    public String Delete(Product product);
     public String DeleteByNume(String nume);
+    public String Save(Product product);
+
 }

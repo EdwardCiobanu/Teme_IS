@@ -62,8 +62,14 @@ public class ProductServiceImplementation implements ProductService {
     }
 
     @Override
-    public void Delete(Product product){
-        productRepository.delete(product);
+    public String Delete(Product product){
+        if(product.getNume().isEmpty()) {
+            return ("Product needed to be deleted");
+        }
+        else{
+            productRepository.delete(product);
+            return ("Product deleted succesfully");
+        }
     }
 
     @Override
@@ -77,6 +83,18 @@ public class ProductServiceImplementation implements ProductService {
                 productRepository.delete(produs);
             }
             return ("Product deleted succesfully");
+        }
+    }
+
+    public String Save(Product product) {
+        if(product.getNume().isEmpty() || product.getPrice() == null){
+            //System.out.println("Date insuficiente");
+            return ("Name and price fields are required / Select a product");
+        }
+        else{
+            productRepository.save(product);
+            return ("Infos updated succesfully");
+            //System.out.println(employee);
         }
     }
 

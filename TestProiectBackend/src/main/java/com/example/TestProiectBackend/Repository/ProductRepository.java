@@ -12,4 +12,5 @@ public interface ProductRepository extends CrudRepository<Product, Integer> {
 
     Product findFirstById(Integer id);
     List<Product> findAllByNume(String nume);
+
 }

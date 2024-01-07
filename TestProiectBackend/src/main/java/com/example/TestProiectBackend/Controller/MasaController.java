@@ -1,9 +1,9 @@
 package com.example.TestProiectBackend.Controller;
 
+import com.example.TestProiectBackend.DTO.AdaugClientiMasa;
+import com.example.TestProiectBackend.DTO.AdaugProdusClient;
 import com.example.TestProiectBackend.DTO.ObiectNou;
-import com.example.TestProiectBackend.Model.Employee;
-import com.example.TestProiectBackend.Model.Masa;
-import com.example.TestProiectBackend.Model.Product;
+import com.example.TestProiectBackend.Model.*;
 import com.example.TestProiectBackend.Service.Implementation.EmployeeServiceImplementation;
 import com.example.TestProiectBackend.Service.Implementation.MasaServiceImplementation;
 import lombok.RequiredArgsConstructor;
@@ -74,9 +74,45 @@ public class MasaController {
     }
 
 
-    @PostMapping("/GetById")
-    public ResponseEntity ReadByID(@RequestBody Integer id) {
-        Masa masa = masaServiceImplementation.ReadById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(masa);
+    @PostMapping("/FindById")
+    public ResponseEntity<Object> ReadByID(@RequestBody Masa masa){
+        if(masa.getId() == null)
+        {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No table selected");
+        }
+
+        Masa masa1 = masaServiceImplementation.findFirstById(masa.getId());
+        System.out.println(masa1.getId());
+        List<Product> productList = masaServiceImplementation.getAllProductsByMasaId(masa1.getId());
+        System.out.println(productList);
+
+        if (productList.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No products found for that person");
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(productList);
+    }
+
+
+
+    @PostMapping("/UpdateMasaPerson")
+    public ResponseEntity<Object> savePersons(@RequestBody AdaugClientiMasa adaugClientiMasa){
+        System.out.println(adaugClientiMasa.getPersons());
+        System.out.println(adaugClientiMasa.getMasa());
+
+
+        List<Person> persons = adaugClientiMasa.getPersons();
+        System.out.println(persons);
+        adaugClientiMasa.getMasa().setPersons(persons);
+        String string1 = masaServiceImplementation.Save(adaugClientiMasa.getMasa());
+
+        if(string1.equals("Infos updated succesfully")){
+            return ResponseEntity.ok(string1);
+        }
+        else{
+            return ResponseEntity.badRequest().body(string1);
+        }
+
+
     }
 }

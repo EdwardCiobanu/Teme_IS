@@ -21,17 +21,15 @@ import {useEffect, useState} from "react";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
 
-interface Persoane {
+interface Mese {
     id: number;
-    age: number;
-    nume: string;
+    nrLocuri: number;
 }
 
 interface Product {
     id: number;
     fullName: string;
     price: number;
-    persons: Persoane[];
 }
 
 // TODO remove, this demo shouldn't need to reset the theme.
@@ -42,15 +40,9 @@ const defaultTheme = createTheme();
 const columns: GridColDef[] = [
     { field: 'id', headerName: 'ID', width: 90 },
     {
-        field: 'age',
-        headerName: 'Varsta',
+        field: 'nrLocuri',
+        headerName: 'Numar de Locuri',
         type: 'number',
-        width: 150,
-        editable: true,
-    },
-    {
-        field: 'nume',
-        headerName: 'Full name',
         width: 150,
         editable: true,
     },
@@ -75,69 +67,69 @@ const columnsProduct: GridColDef[] = [
 ];
 
 
-export default function VizualizareProdusePersoana() {
+export default function VizualizareProduseMasa() {
 
 
-    const [nume, setNume] = React.useState<string>("");
+    const [id, setId] = React.useState<number>(0);
+
     const navigate = useNavigate();
 
 
 
-    const onChangeNume = (event: any): void => {
-        setNume(event.target.value)
+    const onChangeId = (event: any): void => {
+        setId(parseInt(event.target.value))
     }
 
-    const [persons, setPersons] = useState<Persoane[]>([]);
-    const [selectedPerson, setSelectedPerson] = React.useState<Persoane | null>(null);
+    const [mese, setMese] = useState<Mese[]>([]);
+    const [selectedMasa, setSelectedMasa] = React.useState<Mese | null>(null);
     const [products, setProducts] = useState<Product[]>([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8080/Person/FindAll')
+        axios.get('http://localhost:8080/Masa/FindAll')
             .then((response) => {
-                setPersons(response.data);
+                setMese(response.data);
             })
             .catch((error) => {
-                console.error('Error fetching persons:', error);
+                console.error('Error fetching tables:', error);
             });
     }, []);
 
     const handleSelectionChange = (selectionModel: any): void => {
         if (selectionModel.length > 0) {
-            const selectedPersonId = selectionModel[0];
-            const person = persons.find((p) => p.id === selectedPersonId) || null;
-            setSelectedPerson(person);
-            console.log("Selected person", person);
+            const selectedMasaId = selectionModel[0];
+            const masa = mese.find((m) => m.id === selectedMasaId) || null;
+            setSelectedMasa(masa);
+            console.log("Selected masa", masa);
         } else {
-            setSelectedPerson(null);
+            setSelectedMasa(null);
             console.log("No row selected");
         }
     };
 
 
     const onUpdateSelected= (event: any): void => {
-        console.log(selectedPerson)
+        console.log(selectedMasa)
         // if(nume.length != 0)
-        const person = {
-            id: selectedPerson?.id,
-            age: selectedPerson?.age,
-            nume: selectedPerson?.nume,
+        const masa = {
+            id: selectedMasa?.id,
+            nrLocuri: selectedMasa?.nrLocuri,
         }
-        if(selectedPerson != null) {
-            axios.post("http://localhost:8080/Person/FindByNume", person, {
+        if(selectedMasa != null) {
+            axios.post("http://localhost:8080/Masa/FindById", masa, {
                 headers: {
                     "content-type": "application/json"
                 }
             }).then((response: any): void => {
                 console.log(response)
-                setSelectedPerson(null);
+                setSelectedMasa(null);
                 setProducts(response.data);
                 alert("Produsele vor fi afisate in tabela corespunzatoare");
-                axios.get('http://localhost:8080/Person/FindAll')
+                axios.get('http://localhost:8080/Masa/FindAll')
                     .then((response) => {
-                        setPersons(response.data);
+                        setMese(response.data);
                     })
                     .catch((error) => {
-                        console.error('Error fetching persons:', error);
+                        console.error('Error fetching tables:', error);
                     });
             }).catch((error) => {
                 setProducts([]);
@@ -146,26 +138,25 @@ export default function VizualizareProdusePersoana() {
             })
         }
         else{
-            const person = {
+            const masa = {
                 id: 0,
-                age: 0,
-                nume: "",
+                nrLocuri: 0,
             }
-            axios.post("http://localhost:8080/Person/FindByNume", person, {
+            axios.post("http://localhost:8080/Masa/FindById", masa, {
                 headers: {
                     "content-type": "application/json"
                 }
             }).then((response: any): void => {
                 console.log(response)
                 alert("Error");
-                setSelectedPerson(null);
+                setSelectedMasa(null);
                 setProducts([]);
-                axios.get('http://localhost:8080/Person/FindAll')
+                axios.get('http://localhost:8080/Masa/FindAll')
                     .then((response) => {
-                        setPersons(response.data);
+                        setMese(response.data);
                     })
                     .catch((error) => {
-                        console.error('Error fetching persons:', error);
+                        console.error('Error fetching tables:', error);
                     });
             }).catch((error) => {
                 setProducts([]);
@@ -219,7 +210,7 @@ export default function VizualizareProdusePersoana() {
                     >
                         <Box sx={{ flex: 1 }}>
                             <DataGrid
-                                rows={persons}
+                                rows={mese}
                                 columns={columns}
                                 initialState={{
                                     pagination: {

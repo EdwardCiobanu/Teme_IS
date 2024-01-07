@@ -10,6 +10,8 @@ import Persoane from "../Pages/Persoane";
 import Angajat from "../Pages/Angajat";
 import AdaugProductClient from "../Pages/AdaugProductClient";
 import VizualizareProdusePersoana from "../Pages/VizualizareProdusePersoana";
+import AdaugClientMasa from "../Pages/AdaugClientMasa";
+import VizualizareProduseMasa from "../Pages/VizualizareProduseMasa";
 
 const routes: RouteObject[] = [
     {
@@ -53,12 +55,20 @@ const routes: RouteObject[] = [
         element: <VizualizareProdusePersoana />
     },
     {
+        path: "/VizualizareProduseMasa",
+        element: <VizualizareProduseMasa />
+    },
+    {
         path: "/SignUp",
         element: <SignUp />
     },
     {
         path: "/AdaugProductClient",
         element: <AdaugProductClient />
+    },
+    {
+        path: "/AdaugClientMasa",
+        element: <AdaugClientMasa />
     }
 
 

@@ -1,15 +1,14 @@
 package com.example.TestProiectBackend.Service.Implementation;
 
-import com.example.TestProiectBackend.Model.Employee;
-import com.example.TestProiectBackend.Model.Masa;
-import com.example.TestProiectBackend.Model.Person;
-import com.example.TestProiectBackend.Model.Product;
+import com.example.TestProiectBackend.Model.*;
 import com.example.TestProiectBackend.Repository.EmployeeRepository;
+import com.example.TestProiectBackend.Repository.MasaRepository;
 import com.example.TestProiectBackend.Repository.PersonRepository;
 import com.example.TestProiectBackend.Service.PersonService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -84,5 +83,6 @@ public class PersonServiceImplementation implements PersonService {
     public Person findFirstByNume(String nume){
         return personRepository.findFirstByNume(nume);
     }
+
 
 }

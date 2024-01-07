@@ -60,6 +60,10 @@ export default function Angajat() {
         navigate("/VizualizareProdusePersoana");
     }
 
+    const onNavigateVizualizareProdusePentruMasa = (event: any): void => {
+        navigate("/VizualizareProduseMasa");
+    }
+
     const onChangeId = (event: any): void => {
         setId(parseInt(event.target.value))
     }
@@ -189,6 +193,16 @@ export default function Angajat() {
                             onClick = {onNavigateVizualizareProdusePentruPersoana}
                         >
                             Vizualizare produse pentru persoana
+                        </Button>
+
+                        <Button
+                            type="button"
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 3, mb: 0 }}
+                            onClick = {onNavigateVizualizareProdusePentruMasa}
+                        >
+                            Vizualizare produse pentru masa
                         </Button>
                     </Box>
                 </Box>

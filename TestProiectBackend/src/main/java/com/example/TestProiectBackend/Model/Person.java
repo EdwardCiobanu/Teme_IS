@@ -17,8 +17,8 @@ public class Person {
     private Integer id;
     private String nume;
     private Integer age;
-    @OneToMany
-    private List<Masa> mese;
+//    @OneToMany
+//    private List<Masa> mese;
     @OneToMany
     private List<Cos> cosuri;
 

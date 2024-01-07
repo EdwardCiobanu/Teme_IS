@@ -2,6 +2,7 @@ package com.example.TestProiectBackend.Service;
 
 import com.example.TestProiectBackend.Model.Employee;
 import com.example.TestProiectBackend.Model.Masa;
+import com.example.TestProiectBackend.Model.Product;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,4 +16,5 @@ public interface MasaService {
     public void DeleteById(Integer id);
     public String Delete(Masa masa);
     public String Save(Masa masa);
+    public List<Product> getAllProductsByMasaId(Integer id);
 }

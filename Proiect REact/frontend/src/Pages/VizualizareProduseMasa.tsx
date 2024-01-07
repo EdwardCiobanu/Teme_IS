@@ -182,7 +182,7 @@ export default function VizualizareProduseMasa() {
 
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Vizualizare Produse Pentru Persoana
+                    Vizualizare Produse Pentru Masa
                 </Typography>
                 <Box component="form" noValidate sx={{ mt: 3 }}>
                     <Box sx = {{display:"flex", flexDirection:"row", alignItems:"center", gap:"50px", width:"100%"}}>
